@@ -6,8 +6,8 @@ class Game {
     }
 
     createPlayers() {
-        const player1 = new Player('player1', '#e15258', 1, true);
-        const player2 = new Player('player2', '#e59a13', 2);
+        const player1 = new Player('player1', 1, '#e15258', true);
+        const player2 = new Player('player2', 2, '#e59a13');
         return [player1, player2];
     }
 
