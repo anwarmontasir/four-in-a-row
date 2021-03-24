@@ -18,6 +18,7 @@ beginGame.addEventListener('click', e => {
 function clearTokens() {
     const gameBoard = document.getElementById('game-board-underlay');
     const gameBoardChildren = gameBoard.children;
+    /* remove every child but the first */
     while (gameBoardChildren.length > 1) {
         gameBoard.removeChild(gameBoard.lastChild);
     }

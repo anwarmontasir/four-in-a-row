@@ -146,12 +146,7 @@ class Game {
         gameOver.style.display = 'block';
         gameOver.textContent = message;
 
-        this.enableRestart();
-    }
-
-    enableRestart() {
-        const beginGame = document.getElementById('begin-game');
-        beginGame.style.display = 'block';
-        document.getElementById('play-area').style.opacity = '.5';
+        /* enable restart */
+        document.getElementById('begin-game').style.display = 'block';
     }
 }
