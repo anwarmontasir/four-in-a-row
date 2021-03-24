@@ -1,10 +1,10 @@
 class Space {
-    constructor(x, y) {
+    constructor(x, y, diameter) {
         this.x = x;
         this.y = y;
         this.id = `space-${x}-${y}`;
         this.token = null;
-        this.diameter = 76;
+        this.diameter = diameter;
         this.radius = this.diameter / 2;
     }
 

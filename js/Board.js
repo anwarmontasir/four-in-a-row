@@ -3,6 +3,7 @@ class Board {
     constructor() {
         this.rows = 6;
         this.columns = 7;
+        this.diameter = 76;
         this.spaces = this.createSpaces();
     }
 
@@ -13,7 +14,7 @@ class Board {
             const column = [];
 
             for (let y=0; y<this.rows; y++) {
-                const space = new Space(x, y);
+                const space = new Space(x, y, this.diameter);
                 column.push(space);
             }
 

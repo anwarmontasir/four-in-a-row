@@ -26,9 +26,9 @@ class Game {
         document.addEventListener('keydown', e => {
             if (this.ready) {
                 if (e.key === 'ArrowLeft') {
-                    // arrowLeft
+                    this.activePlayer.activeToken.moveLeft(this.board.diameter)
                 } else if (e.key === 'ArrowRight') {
-                    // arrowRight
+                    this.activePlayer.activeToken.moveRight(this.board.diameter, this.board.columns);
                 } else if (e.key === 'ArrowDown') {
                     // arrowDown
                 }
