@@ -11,11 +11,12 @@ class Game {
         return [player1, player2];
     }
 
+    /* find active player */
     get activePlayer() {
-
+        return this.players.find(player => player.active);
     }
 
     startGame() {
-        return this.players.find(player => player.active);
+        
     }
 }
