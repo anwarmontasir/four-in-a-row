@@ -21,4 +21,18 @@ class Game {
         this.activePlayer.activeToken.drawHTMLToken();
         this.ready = true;
     }
+
+    handleKeyDown() {
+        document.addEventListener('keydown', e => {
+            if (this.ready) {
+                if (e.key === 'ArrowLeft') {
+                    // arrowLeft
+                } else if (e.key === 'ArrowRight') {
+                    // arrowRight
+                } else if (e.key === 'ArrowDown') {
+                    // arrowDown
+                }
+            }
+        })
+    }
 }
