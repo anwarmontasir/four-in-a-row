@@ -53,17 +53,26 @@ class Game {
             /* deactivate game during animation */
             this.ready = false;
             /* drop token to target row */
-            this.activePlayer.activeToken.drop(target);
-            /* mark space */
-            target.mark(this.activePlayer.activeToken);
+            this.activePlayer.activeToken.drop(target, () => {
+                this.updateGameState(this.activePlayer.activeToken, target);
+            });
         }
+    }
 
-        const winner = this.checkForWin(target);
+    updateGameState(token, target) {
+        /* mark space */
+        target.mark(token);
 
-        if (winner) {
-            this.gameOver();
+        if (this.checkForWin(target)) {
+            this.gameOver(`${this.activePlayer.name} has won!`);
         } else {
             this.switchPlayers();
+            if (!this.checkTokens) {
+                this.gameOver('out of tokens :(');
+            } else {
+                this.activePlayer.activeToken.drawHTMLToken();
+                this.ready = true;
+            }
         }
     }
 
@@ -125,6 +134,10 @@ class Game {
     switchPlayers() {
         this.players[0].active = !this.players[0].active;
         this.players[1].active = !this.players[1].active;
+    }
+
+    checkTokens() {
+        return (this.activePlayer.tokens > 0 ? true : false);
     }
 
     gameOver(message) {
