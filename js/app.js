@@ -1,9 +1,12 @@
 const beginGame = document.getElementById('begin-game');
 
 beginGame.addEventListener('click', e => {
+    /* if tokens are in DOM, clear them */
     clearTokens();
+    /* if game over message is showing, clear it */
     document.getElementById('game-over').style.display = 'none';    
     
+    /* start new game */
     const game = new Game();
 
     e.target.style.display = 'none';
