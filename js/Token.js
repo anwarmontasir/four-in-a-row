@@ -5,6 +5,10 @@ class Token {
         this.dropped = false;
     }
 
+    get htmlToken() {
+        return document.getElementById(this.id);
+    }
+
     drawHTMLToken() {
         const newDiv = document.createElement('div');
 
@@ -12,10 +16,6 @@ class Token {
 
         newDiv.setAttribute('id', this.id);
         newDiv.setAttribute('class', 'token');
-        newDiv.style.backgroundColor.this.owner.color;
-    }
-
-    get htmlToken() {
-        return document.getElementById(this.id);
+        newDiv.style.backgroundColor = this.owner.color;
     }
 }
