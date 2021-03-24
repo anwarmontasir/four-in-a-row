@@ -39,12 +39,12 @@ class Game {
     playToken() {
         // target is the space object to drop into
         let target;
-        
+
         // array of rows within the columnLocation
         const rows = this.board.spaces[this.activePlayer.activeToken.columnLocation];
-        
+
         // set target to farthest unoccupied row
-        for (let i=0; i<rows.length; i++) {
+        for (let i = 0; i < rows.length; i++) {
             if (!rows[i].token) {
                 target = rows[i];
             }
@@ -53,7 +53,84 @@ class Game {
             /* deactivate game during animation */
             this.ready = false;
             /* drop token to target row */
-            this.activePlayer.activeToken.drop(target)
+            this.activePlayer.activeToken.drop(target);
+            /* mark space */
+            target.mark(this.activePlayer.activeToken);
         }
+
+        const winner = this.checkForWin(target);
+
+        if (winner) {
+            this.gameOver();
+        } else {
+            this.switchPlayers();
+        }
+    }
+
+    checkForWin(target) {
+        const owner = target.token.owner;
+        let win = false;
+
+        // vertical
+        for (let x = 0; x < this.board.columns; x++) {
+            for (let y = 0; y < this.board.rows - 3; y++) {
+                if (this.board.spaces[x][y].owner === owner &&
+                    this.board.spaces[x][y + 1].owner === owner &&
+                    this.board.spaces[x][y + 2].owner === owner &&
+                    this.board.spaces[x][y + 3].owner === owner) {
+                    win = true;
+                }
+            }
+        }
+
+        // horizontal
+        for (let x = 0; x < this.board.columns - 3; x++) {
+            for (let y = 0; y < this.board.rows; y++) {
+                if (this.board.spaces[x][y].owner === owner &&
+                    this.board.spaces[x + 1][y].owner === owner &&
+                    this.board.spaces[x + 2][y].owner === owner &&
+                    this.board.spaces[x + 3][y].owner === owner) {
+                    win = true;
+                }
+            }
+        }
+
+        // diagonal
+        for (let x = 3; x < this.board.columns; x++) {
+            for (let y = 0; y < this.board.rows - 3; y++) {
+                if (this.board.spaces[x][y].owner === owner &&
+                    this.board.spaces[x - 1][y + 1].owner === owner &&
+                    this.board.spaces[x - 2][y + 2].owner === owner &&
+                    this.board.spaces[x - 3][y + 3].owner === owner) {
+                    win = true;
+                }
+            }
+        }
+
+        // diagonal
+        for (let x = 3; x < this.board.columns; x++) {
+            for (let y = 3; y < this.board.rows; y++) {
+                if (this.board.spaces[x][y].owner === owner &&
+                    this.board.spaces[x - 1][y - 1].owner === owner &&
+                    this.board.spaces[x - 2][y - 2].owner === owner &&
+                    this.board.spaces[x - 3][y - 3].owner === owner) {
+                    win = true;
+                }
+            }
+        }
+
+        return win;
+    }
+
+    switchPlayers() {
+        this.players[0].active = !this.players[0].active;
+        this.players[1].active = !this.players[1].active;
+    }
+
+    gameOver(message) {
+        const gameOver = document.getElementById('game-over');
+
+        gameOver.style.display = 'block';
+        gameOver.textContent = message;
     }
 }
