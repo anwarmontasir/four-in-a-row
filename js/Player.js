@@ -23,6 +23,6 @@ class Player {
 
     /* return first token in array */
     get activeToken() {
-        return this.tokens[0];
+        return this.unusedTokens[0];
     }
 }

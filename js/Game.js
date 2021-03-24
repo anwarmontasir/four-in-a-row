@@ -5,15 +5,15 @@ class Game {
         this.ready = false;
     }
 
+    /* find active player */
+    get activePlayer() {
+        return this.players.find(player => player.active);
+    }
+
     createPlayers() {
         const player1 = new Player('player1', 1, '#e15258', true);
         const player2 = new Player('player2', 2, '#e59a13');
         return [player1, player2];
-    }
-
-    /* find active player */
-    get activePlayer() {
-        return this.players.find(player => player.active);
     }
 
     startGame() {
@@ -137,7 +137,7 @@ class Game {
     }
 
     checkTokens() {
-        return (this.activePlayer.tokens > 0 ? true : false);
+        return (this.activePlayer.unusedTokens.length > 0 ? true : false);
     }
 
     gameOver(message) {
