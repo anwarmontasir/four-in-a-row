@@ -15,4 +15,14 @@ class Player {
         }
         return tokensArray;
     }
+
+    /* get tokens that haven't been dropped */
+    get unusedTokens() {
+        return this.tokens.filter(token => !token.dropped);
+    }
+
+    /* return first token in array */
+    get activeToken() {
+        return this.tokens[0];
+    }
 }
