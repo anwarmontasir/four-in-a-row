@@ -30,9 +30,30 @@ class Game {
                 } else if (e.key === 'ArrowRight') {
                     this.activePlayer.activeToken.moveRight(this.board.diameter, this.board.columns);
                 } else if (e.key === 'ArrowDown') {
-                    // arrowDown
+                    this.playToken();
                 }
             }
         })
+    }
+
+    playToken() {
+        // target is the space object to drop into
+        let target;
+        
+        // array of rows within the columnLocation
+        const rows = this.board.spaces[this.activePlayer.activeToken.columnLocation];
+        
+        // set target to farthest unoccupied row
+        for (let i=0; i<rows.length; i++) {
+            if (!rows[i].token) {
+                target = rows[i];
+            }
+        }
+        if (target) {
+            /* deactivate game during animation */
+            this.ready = false;
+            /* drop token to target row */
+            this.activePlayer.activeToken.drop(target)
+        }
     }
 }

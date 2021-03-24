@@ -42,4 +42,13 @@ class Token {
             this.columnLocation++;
         }
     }
+
+    drop(target, reset) {
+        this.dropped = true;
+        
+        /* rewrite without jQuery? */
+        $(this.htmlToken).animate({
+            top: (target.y * target.diameter)
+        }, 750, 'easeOutBounce', reset);
+    }
 }
